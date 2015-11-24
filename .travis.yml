@@ -1,0 +1,11 @@
+language: csharp
+sudo: false
+
+before_install:
+  - nuget install NUnit -Version 2.6.4
+  - nuget install NUnit.Runners -Version 2.6.4
+
+script: 
+ - xbuild nunit.csproj
+ - xbuild nunit.csproj /t:test
+

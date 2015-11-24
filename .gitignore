@@ -1,0 +1,9 @@
+NUnit.2.6.4
+NUnit.Runners.2.6.4
+
+TestResult.xml
+obj
+
+*.exe
+*.dll
+*.dll.mdb
