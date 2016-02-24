@@ -10,32 +10,67 @@ namespace Hiptest.Publisher.Samples {
 
         [SetUp]
         protected void SetUp() {
-          Actionwords = new Actionwords();
+            Actionwords = new Actionwords();
         }
-
-        public void SimpleUse(string lang, string readyMessage) {
-            // Given I start the coffee machine "<lang>"
-            Actionwords.IStartTheCoffeeMachine(lang);
+        // Well, sometimes, you just get a coffee.
+        [Test]
+        public void SimpleUse() {
+            // Given the coffee machine is started
+            Actionwords.TheCoffeeMachineIsStarted();
             // When I take a coffee
             Actionwords.ITakeACoffee();
             // Then coffee should be served
             Actionwords.CoffeeShouldBeServed();
         }
-
+        // Simple scenario showing that after 50 coffees, the "Fill tank" message is displayed but it is still possible to have coffee until the tank is fully empty.
         [Test]
-        public void SimpleUseEnglishUidbe213f3d8bd24c378ed23a494fd92e87() {
-            SimpleUse("en", "Ready");
+        public void WaterRunsAway() {
+            // Given the coffee machine is started
+            Actionwords.TheCoffeeMachineIsStarted();
+            // When fifty coffees have been taken without filling the tank
+            Actionwords.FiftyCoffeesHaveBeenTakenWithoutFillingTheTank();
+            // Then message "Fill tank" should be displayed
+            Actionwords.MessageMessageShouldBeDisplayed("Fill tank");
+            // When I take a coffee
+            Actionwords.ITakeACoffee();
+            // Then coffee should be served
+            Actionwords.CoffeeShouldBeServed();
+            // When I take "10" coffees
+            Actionwords.ITakeCoffeeNumberCoffees(10);
+            // Then coffee should not be served
+            Actionwords.CoffeeShouldNotBeServed();
+            // And message "Fill tank" should be displayed
+            Actionwords.MessageMessageShouldBeDisplayed("Fill tank");
+            // When I fill the water tank
+            Actionwords.IFillTheWaterTank();
+            // Then message "Ready" should be displayed
+            Actionwords.MessageMessageShouldBeDisplayed("Ready");
         }
-
+        // Simple scenario showing that after 38 coffees, the message "Fill beans" is displayed but it is possible to take two coffees until there is no more beans.
         [Test]
-        public void SimpleUseFrenchUid9809634535224858b55ce02196b18482() {
-            SimpleUse("fr", "Pret");
+        public void BeansRunOut() {
+            // Given the coffee machine is started
+            Actionwords.TheCoffeeMachineIsStarted();
+            // When thirty eight coffees are taken without filling beans
+            Actionwords.ThirtyEightCoffeesAreTakenWithoutFillingBeans();
+            // Then coffee should be served
+            Actionwords.CoffeeShouldBeServed();
+            // And message "Fill beans" should be displayed
+            Actionwords.MessageMessageShouldBeDisplayed("Fill beans");
+            // When I take "2" coffees
+            Actionwords.ITakeCoffeeNumberCoffees(2);
+            // Then coffee should be served
+            Actionwords.CoffeeShouldBeServed();
+            // And message "Fill beans" should be displayed
+            Actionwords.MessageMessageShouldBeDisplayed("Fill beans");
+            // When I take a coffee
+            Actionwords.ITakeACoffee();
+            // Then coffee should not be served
+            Actionwords.CoffeeShouldNotBeServed();
         }
-
-
-
+        // You keep getting coffee even if the "Empty grounds" message is displayed. That said it's not a fantastic idea, you'll get ground everywhere when you'll decide to empty it.
         [Test]
-        public void FullGroundsDoesNotBlockCoffeeUid1d0d17c3355e4a6eb293ecaa533b21ef() {
+        public void FullGroundsDoesNotBlockCoffee() {
             // Given the coffee machine is started
             Actionwords.TheCoffeeMachineIsStarted();
             // When I take "29" coffees
@@ -59,52 +94,6 @@ namespace Hiptest.Publisher.Samples {
             // And message "Empty grounds" should be displayed
             Actionwords.MessageMessageShouldBeDisplayed("Empty grounds");
         }
-
-        [Test]
-        public void WaterRunsAwayUidae4016f69b4d4ad7aeba32f710a9b6ab() {
-            // Given the coffee machine is started
-            Actionwords.TheCoffeeMachineIsStarted();
-            // When fifty coffees have been taken without filling the tank
-            Actionwords.FiftyCoffeesHaveBeenTakenWithoutFillingTheTank();
-            // Then message "Fill tank" should be displayed
-            Actionwords.MessageMessageShouldBeDisplayed("Fill tank");
-            // When I take a coffee
-            Actionwords.ITakeACoffee();
-            // Then coffee should be served
-            Actionwords.CoffeeShouldBeServed();
-            // When I take "10" coffees
-            Actionwords.ITakeCoffeeNumberCoffees(10);
-            // Then coffee should not be served
-            Actionwords.CoffeeShouldNotBeServed();
-            // And message "Fill tank" should be displayed
-            Actionwords.MessageMessageShouldBeDisplayed("Fill tank");
-            // When I fill the water tank
-            Actionwords.IFillTheWaterTank();
-            // Then message "Ready" should be displayed
-            Actionwords.MessageMessageShouldBeDisplayed("Ready");
-        }
-
-        [Test]
-        public void BeansRunOutUidf92ba764a84d4779b8ab585148497b89() {
-            // Given the coffee machine is started
-            Actionwords.TheCoffeeMachineIsStarted();
-            // When thirty eight coffees are taken without filling beans
-            Actionwords.ThirtyEightCoffeesAreTakenWithoutFillingBeans();
-            // Then coffee should be served
-            Actionwords.CoffeeShouldBeServed();
-            // And message "Fill beans" should be displayed
-            Actionwords.MessageMessageShouldBeDisplayed("Fill beans");
-            // When I take "2" coffees
-            Actionwords.ITakeCoffeeNumberCoffees(2);
-            // Then coffee should be served
-            Actionwords.CoffeeShouldBeServed();
-            // And message "Fill beans" should be displayed
-            Actionwords.MessageMessageShouldBeDisplayed("Fill beans");
-            // When I take a coffee
-            Actionwords.ITakeACoffee();
-            // Then coffee should not be served
-            Actionwords.CoffeeShouldNotBeServed();
-        }
         public void MessagesAreBasedOnLanguage(string lang, string readyMessage) {
             // When I start the coffee machine "<lang>"
             Actionwords.IStartTheCoffeeMachine(lang);
@@ -113,19 +102,19 @@ namespace Hiptest.Publisher.Samples {
         }
 
         [Test]
-        public void MessagesAreBasedOnLanguageEnglishUida4f9103300244a8bba72bad87b11abca() {
+        public void MessagesAreBasedOnLanguageEnglish() {
             MessagesAreBasedOnLanguage("en", "Ready");
         }
 
         [Test]
-        public void MessagesAreBasedOnLanguageFrenchUidb91d9effab85422498638f6e97f357d0() {
+        public void MessagesAreBasedOnLanguageFrench() {
             MessagesAreBasedOnLanguage("fr", "Pret");
         }
 
 
 
         [Test]
-        public void NoMessagesAreDisplayedWhenMachineIsShutDownUid35f4862793964a0b9090bad7ac1fa0f1() {
+        public void NoMessagesAreDisplayedWhenMachineIsShutDown() {
             // Given the coffee machine is started
             Actionwords.TheCoffeeMachineIsStarted();
             // When I shutdown the coffee machine
