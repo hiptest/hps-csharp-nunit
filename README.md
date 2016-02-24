@@ -19,7 +19,6 @@ The SUT is a (not that much) simple coffee machine. You start it, you ask for a 
 Update tests
 -------------
 
-
 To update the tests:
 
     hiptest-publisher -c nunit.conf --only=tests
@@ -28,7 +27,6 @@ The tests are generated in the [``tests``](https://github.com/hiptest/hps-csharp
 
 Run tests
 ---------
-
 
 To build the project and run the tests, use the following command:
 
