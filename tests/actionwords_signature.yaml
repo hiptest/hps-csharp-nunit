@@ -35,9 +35,21 @@
 - name: the coffee machine is started
   uid: 8895cca1-e61d-4d7a-81ed-92b2ab5d8cc6
   parameters: []
-- name: fifty coffees have been taken without filling the tank
-  uid: 139f3c90-87b7-4e9c-985b-289184ae326b
+- name: I handle everything except the water tank
+  uid: 2ccd9ce3-3232-48b1-91f5-ff53f49b41ac
   parameters: []
-- name: thirty eight coffees are taken without filling beans
-  uid: 035eb21a-1bbb-4969-86fd-fd92443db382
+- name: I handle water tank
+  uid: 4ffa622c-efe6-4741-b443-dc6d3ea74ff5
+  parameters: []
+- name: I handle beans
+  uid: 1764b78a-9a87-46e3-8cda-f3dfab067a44
+  parameters: []
+- name: I handle coffee grounds
+  uid: e1e02624-26f6-41a2-b442-bd0100b5edc6
+  parameters: []
+- name: I handle everything except the beans
+  uid: d552784f-ae9f-459a-b2e0-6b8ab50b06a4
+  parameters: []
+- name: I handle everything except the grounds
+  uid: 26f61e10-5a86-40a6-8253-aad5cc2e86f7
   parameters: []

@@ -1,8 +1,11 @@
+using System.Collections.Generic;
+
 namespace Hiptest.Publisher.Samples {
     using NUnit.Framework;
 
     public class Actionwords {
         CoffeeMachine Sut = new CoffeeMachine();
+        List<string> Handled = new List<string>();
 
         public void IStartTheCoffeeMachine(string lang = "en") {
             Sut.Start(lang);
@@ -44,6 +47,19 @@ namespace Hiptest.Publisher.Samples {
             while ((coffeeNumber > 0)) {
                 ITakeACoffee();
                 coffeeNumber = coffeeNumber - 1;
+
+                if (Handled.Contains("Water")) {
+                    IFillTheWaterTank();
+                }
+
+                if (Handled.Contains("Beans")) {
+                    IFillTheBeansTank();
+                }
+
+
+                if (Handled.Contains("Grounds")) {
+                    IEmptyTheCoffeeGrounds();
+                }
             }
         }
 
@@ -51,20 +67,32 @@ namespace Hiptest.Publisher.Samples {
             IStartTheCoffeeMachine();
         }
 
-        public void FiftyCoffeesHaveBeenTakenWithoutFillingTheTank() {
-            ITakeCoffeeNumberCoffees(30);
-            IFillTheBeansTank();
-            IEmptyTheCoffeeGrounds();
-            ITakeCoffeeNumberCoffees(20);
-            IFillTheBeansTank();
-            IEmptyTheCoffeeGrounds();
+        public void IHandleWaterTank() {
+            Handled.Add("Water");
         }
 
-        public void ThirtyEightCoffeesAreTakenWithoutFillingBeans() {
-            ITakeCoffeeNumberCoffees(37);
-            IEmptyTheCoffeeGrounds();
-            IFillTheWaterTank();
-            ITakeACoffee();
+        public void IHandleBeans() {
+            Handled.Add("Beans");
         }
+
+        public void IHandleCoffeeGrounds() {
+            Handled.Add("Grounds");
+        }
+
+        public void IHandleEverythingExceptTheWaterTank() {
+            this.IHandleCoffeeGrounds();
+            this.IHandleBeans();
+        }
+
+        public void IHandleEverythingExceptTheBeans() {
+            this.IHandleWaterTank();
+            this.IHandleCoffeeGrounds();
+        }
+
+        public void IHandleEverythingExceptTheGrounds() {
+            this.IHandleWaterTank();
+            this.IHandleBeans();
+        }
+
     }
 }

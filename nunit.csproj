@@ -34,7 +34,11 @@
   <ItemGroup>
     <Compile Include="class/CoffeeMachine.cs" />
     <Compile Include="tests/Actionwords.cs" />
-    <Compile Include="tests/ProjectTest.cs" />
+    <Compile Include="tests/ErrorMessages/BeansTest.cs" />
+    <Compile Include="tests/ErrorMessages/GroundsTest.cs" />
+    <Compile Include="tests/ErrorMessages/WaterTest.cs" />
+    <Compile Include="tests/NominalCaseTest.cs" />
+    <Compile Include="tests/WeirdSpecsTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
