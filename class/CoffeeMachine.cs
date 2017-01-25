@@ -10,13 +10,17 @@ namespace Hiptest.Publisher.Samples {
         private int _grounds;
         private bool _started;
         private string _lang;
+        private bool _settingsDisplayed = false;
+        private string _waterHardness = "2";
+        private string _grinder = "medium";
 
         private static readonly Dictionary<string, string> _english = new Dictionary<string, string>
             {
                 {"tank", "Fill tank"},
                 {"beans", "Fill beans"},
                 {"grounds", "Empty grounds"},
-                {"ready", "Ready"}
+                {"ready", "Ready"},
+                {"settings", "Settings:\n - 1: water hardness\n - 2: grinder"}
             };
 
         private static readonly Dictionary<string, string> _french = new Dictionary<string, string>
@@ -24,7 +28,8 @@ namespace Hiptest.Publisher.Samples {
                 {"tank", "Remplir reservoir"},
                 {"beans", "Ajouter grains"},
                 {"grounds", "Vider marc"},
-                {"ready", "Pret"}
+                {"ready", "Pret"},
+                {"settings", "Configurer:\n - 1: durete de l'eau\n - 2: mouture"}
             };
 
         public CoffeeMachine() {
@@ -32,6 +37,23 @@ namespace Hiptest.Publisher.Samples {
             FillTank();
             FillBeans();
             EmptyGrounds();
+        }
+
+        public void ShowSettings() {
+            _settingsDisplayed = true;
+            UpdateMessage();
+        }
+
+        public void QuitSettings() {
+            _settingsDisplayed = false;
+            UpdateMessage();
+        }
+
+        public Dictionary<string, string> GetSettings() {
+            return new Dictionary<string, string> {
+                {"water hardness", _waterHardness},
+                {"grinder", _grinder}
+            };
         }
 
         public void Start (string lang = "en") {
@@ -81,6 +103,11 @@ namespace Hiptest.Publisher.Samples {
         private void UpdateMessage() {
             if (!_started) {
                 Message =  "";
+                return;
+            }
+
+            if (_settingsDisplayed) {
+                Message = GetMessage("settings");
                 return;
             }
 

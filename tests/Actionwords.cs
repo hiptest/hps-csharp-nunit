@@ -7,7 +7,7 @@ namespace Hiptest.Publisher.Samples {
         CoffeeMachine Sut = new CoffeeMachine();
         List<string> Handled = new List<string>();
 
-        public void IStartTheCoffeeMachine(string lang = "en") {
+        public void IStartTheCoffeeMachineUsingLanguageLang(string lang = "en") {
             Sut.Start(lang);
         }
 
@@ -64,7 +64,7 @@ namespace Hiptest.Publisher.Samples {
         }
 
         public void TheCoffeeMachineIsStarted() {
-            IStartTheCoffeeMachine();
+            IStartTheCoffeeMachineUsingLanguageLang();
         }
 
         public void IHandleWaterTank() {
@@ -94,5 +94,24 @@ namespace Hiptest.Publisher.Samples {
             this.IHandleBeans();
         }
 
+        public void DisplayedMessageIs(string freeText) {
+            this.MessageMessageShouldBeDisplayed(freeText);
+        }
+
+        public void ISwitchToSettingsMode() {
+            this.Sut.ShowSettings();
+        }
+
+        public void SettingsShouldBe(string datatable) {
+            Dictionary<string, string> settings = new Dictionary<string, string> {};
+
+            foreach (string line in datatable.Split('\n')) {
+                string[] cells = line.Split('|');
+
+                settings[cells[1].Trim()] = cells[2].Trim();
+            }
+
+            Assert.AreEqual(settings, Sut.GetSettings());
+        }
     }
 }

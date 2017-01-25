@@ -34,11 +34,13 @@
   <ItemGroup>
     <Compile Include="class/CoffeeMachine.cs" />
     <Compile Include="tests/Actionwords.cs" />
-    <Compile Include="tests/ErrorMessages/BeansTest.cs" />
-    <Compile Include="tests/ErrorMessages/GroundsTest.cs" />
-    <Compile Include="tests/ErrorMessages/WaterTest.cs" />
-    <Compile Include="tests/NominalCaseTest.cs" />
-    <Compile Include="tests/WeirdSpecsTest.cs" />
+    <Compile Include="tests/DisplayErrors/BeansTest.cs" />
+    <Compile Include="tests/DisplayErrors/GroundsTest.cs" />
+    <Compile Include="tests/DisplayErrors/WaterTest.cs" />
+    <Compile Include="tests/BadUsageTest.cs" />
+    <Compile Include="tests/CanBeConfiguredTest.cs" />
+    <Compile Include="tests/ServeCoffeeTest.cs" />
+    <Compile Include="tests/SupportInternationalisationTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
