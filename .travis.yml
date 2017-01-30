@@ -5,7 +5,6 @@ before_install:
   - rvm install 2.2
   - rvm use 2.2
   - gem install hiptest-publisher
-  - hiptest-publisher -c nunit.conf --only=tests
   - nuget install NUnit -Version 2.6.4
   - nuget install NUnit.Runners -Version 2.6.4
   - rvm install 2.2
