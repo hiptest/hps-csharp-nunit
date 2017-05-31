@@ -12,9 +12,9 @@ before_install:
   - gem install hiptest-publisher
   - hiptest-publisher -c nunit.conf --token=$SECRET_TOKEN --only=tests --test-run-id=9861
 
-script: 
- - xbuild nunit.csproj
- - xbuild nunit.csproj /t:test
+script:
+ - msbuild nunit.csproj
+ - msbuild nunit.csproj /t:test
 
 after_script:
   - hiptest-publisher -c nunit.conf --token=$SECRET_TOKEN --push=TestResult.xml --test-run-id=9861
