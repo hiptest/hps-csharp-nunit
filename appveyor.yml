@@ -18,7 +18,9 @@ before_test:
   - hiptest-publisher -c nunit.conf --token=%SECRET_TOKEN% --only=tests --test-run-id=9861
 
 test:
-  - nunit-console hiptest.publisher.samples
+  assemblies:
+    only:
+      - hiptest.publisher.samples.dll
 
 after_test:
   - type TestResult.xml
