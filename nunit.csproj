@@ -29,6 +29,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System.dll" />
+    <Reference Include="System.Core.dll" />
     <Reference Include="NUnit.2.6.4/lib/nunit.framework.dll" />
   </ItemGroup>
   <ItemGroup>
