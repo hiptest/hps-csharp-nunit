@@ -12,15 +12,15 @@ environment:
 #   - SET PATH=C:\Ruby%RUBY_VERSION%\bin;%PATH%
 #   - gem install hiptest-publisher
 
-before_build:
-  - nuget restore
+# before_build:
+#   - nuget restore
 
 # before_test:
 #   - hiptest-publisher -c nunit.conf --token=%SECRET_TOKEN% --only=tests --test-run-id=9861
 
-test:
-  assemblies:
-    - '**\*.Test.dll'
+# test:
+#   assemblies:
+#     - '**\*.Test.dll'
 
 # after_test:
 #   - type TestResult.xml
