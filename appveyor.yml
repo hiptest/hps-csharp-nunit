@@ -18,6 +18,7 @@ before_test:
   - hiptest-publisher -c nunit.conf --token=%SECRET_TOKEN% --only=tests --test-run-id=9861
 
 after_test:
+  - type TestResult.xml
   - hiptest-publisher -c nunit.conf --token=%SECRET_TOKEN% --push=TestResult.xml --test-run-id=9861
 
 build: off
