@@ -8,6 +8,10 @@ environment:
   SECRET_TOKEN:
     secure: LTq33sBzoy1aaeUFoKbV/Na1u0PO/IUDVxOQdz+taXgZ1Qv1OfmKYwID8td3owSOJ5tBWRgztdLySruyXaMOCg==
 
+before_build:
+  - nuget install NUnit -Version 2.6.4
+  - nuget install NUnit.Runners -Version 2.6.4
+
 build:
   include_nuget_references: true
 
