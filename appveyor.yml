@@ -4,16 +4,15 @@ skip_tags: true
 
 environment:
   matrix:
-    - RUBY_VERSION: "22-x64"
-    - RUBY_VERSION: "22"
-    - RUBY_VERSION: "24-x64"
     - RUBY_VERSION: "24"
+  SECRET_TOKEN:
+    secure: LTq33sBzoy1aaeUFoKbV/Na1u0PO/IUDVxOQdz+taXgZ1Qv1OfmKYwID8td3owSOJ5tBWRgztdLySruyXaMOCg==
 
 install:
   - nuget install NUnit -Version 2.6.4
   - nuget install NUnit.Runners -Version 2.6.4
   - SET PATH=C:\Ruby%RUBY_VERSION%\bin;%PATH%
   - gem install hiptest-publisher
-  - hiptest-publisher -c nunit.conf --token=$SECRET_TOKEN --only=tests --test-run-id=9861
+  - hiptest-publisher -c nunit.conf --token=%SECRET_TOKEN% --only=tests --test-run-id=9861
 
 build: off
