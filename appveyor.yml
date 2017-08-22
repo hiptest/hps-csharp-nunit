@@ -13,8 +13,7 @@ install:
   - gem install hiptest-publisher
 
 before_build:
-  - nuget install NUnit -Version 2.6.4
-  - nuget install NUnit.Runners -Version 2.6.4
+  - nuget restore
 
 before_test:
   - hiptest-publisher -c nunit.conf --token=%SECRET_TOKEN% --only=tests --test-run-id=9861
