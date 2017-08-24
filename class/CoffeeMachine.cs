@@ -8,6 +8,7 @@ namespace Hiptest.Publisher.Samples {
         private int _tank;
         private int _beans;
         private int _grounds;
+        private int _countdownToDescale;
         private bool _started;
         private string _lang;
         private bool _settingsDisplayed = false;
@@ -20,7 +21,8 @@ namespace Hiptest.Publisher.Samples {
                 {"beans", "Fill beans"},
                 {"grounds", "Empty grounds"},
                 {"ready", "Ready"},
-                {"settings", "Settings:\n - 1: water hardness\n - 2: grinder"}
+                {"settings", "Settings:\n - 1: water hardness\n - 2: grinder"},
+                {"descale", "Descaling is needed"}
             };
 
         private static readonly Dictionary<string, string> _french = new Dictionary<string, string>
@@ -29,7 +31,8 @@ namespace Hiptest.Publisher.Samples {
                 {"beans", "Ajouter grains"},
                 {"grounds", "Vider marc"},
                 {"ready", "Pret"},
-                {"settings", "Configurer:\n - 1: durete de l'eau\n - 2: mouture"}
+                {"settings", "Configurer:\n - 1: durete de l'eau\n - 2: mouture"},
+                {"descale", "Detartrage requis"}
             };
 
         public CoffeeMachine() {
@@ -37,6 +40,7 @@ namespace Hiptest.Publisher.Samples {
             FillTank();
             FillBeans();
             EmptyGrounds();
+            Descale();
         }
 
         public void ShowSettings() {
@@ -59,7 +63,7 @@ namespace Hiptest.Publisher.Samples {
         public void Start (string lang = "en") {
             _lang = lang;
             _started = true;
-            CoffeeServed = true;
+            CoffeeServed = false;
             UpdateMessage();
         }
 
@@ -82,6 +86,7 @@ namespace Hiptest.Publisher.Samples {
             _tank -= 1;
             _beans -=1;
             _grounds += 1;
+            _countdownToDescale -= 1;
             UpdateMessage();
         }
 
@@ -98,6 +103,15 @@ namespace Hiptest.Publisher.Samples {
         public void EmptyGrounds () {
             _grounds = 0;
             UpdateMessage();
+        }
+
+        public void Descale() {
+            _countdownToDescale = 500;
+            UpdateMessage();
+        }
+
+        public bool IsDescalingNeeded() {
+            return _countdownToDescale <= 0;
         }
 
         private void UpdateMessage() {
@@ -123,6 +137,11 @@ namespace Hiptest.Publisher.Samples {
 
             if (_grounds >= 30) {
                 Message = GetMessage("grounds");
+                return;
+            }
+
+            if (IsDescalingNeeded()) {
+                Message = GetMessage("descale");
                 return;
             }
             Message = GetMessage("ready");
