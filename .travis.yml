@@ -2,17 +2,17 @@ language: csharp
 sudo: false
 
 before_install:
-  - rvm install 2.2
-  - rvm use 2.2
+  - rvm install 2.3
+  - rvm use 2.3
   - gem install hiptest-publisher
   - nuget install NUnit -Version 2.6.4
   - nuget install NUnit.Runners -Version 2.6.4
-  - rvm install 2.2
-  - rvm use 2.2
+  - rvm install 2.3
+  - rvm use 2.3
   - gem install hiptest-publisher
   - hiptest-publisher -c nunit.conf --token=$SECRET_TOKEN --only=tests --test-run-id=9861
 
-script: 
+script:
  - xbuild nunit.csproj
  - xbuild nunit.csproj /t:test
 
